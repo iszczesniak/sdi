@@ -15,6 +15,7 @@
 #define NT_S "nt"
 #define ST_S "st"
 #define RT_S "rt"
+#define RE_S "re"
 #define MLC_S "mlc"
 #define K_S "K"
 #define EDGES_S "edges"
@@ -94,7 +95,10 @@ process_sdi_args(int argc, const char *argv[])
          "the spectrum selection type")
 
         (RT_S, po::value<string>()->required(),
-         "the routing algorithm");
+         "the routing algorithm")
+
+        (RE_S, po::value<string>()->required(),
+         "the reconfiguration type");
 
       // Traffic options.
       po::options_description tra("Traffic options");
@@ -161,6 +165,7 @@ process_sdi_args(int argc, const char *argv[])
 
       result.st = vm[ST_S].as<string>();
       result.rt = vm[RT_S].as<string>();
+      result.re = vm[RE_S].as<string>();
 
       // The traffic options.
       result.ol = vm["ol"].as<double>();

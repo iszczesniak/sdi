@@ -100,6 +100,9 @@ simulate(const sdi_args &args_para)
   // Set the spectrum selection type.
   routing::set_st(args.st);
 
+  // Set how the connections should be reconfigured.
+  connection::set_re(args.re);
+
   // This simulation object.
   sim::rng().seed(args.seed);
 

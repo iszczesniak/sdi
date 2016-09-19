@@ -16,18 +16,27 @@ using namespace std;
 client::client(double mht, double mnsc, traffic &tra):
   mht(mht), htd(1 / mht), htg(m_rng, htd),
   mnsc(mnsc), nscd(mnsc - 1), nscdg(m_rng, nscd),
+  nohd(mnoh - 1), nohdg(m_rng, nohd),
   conn(m_mdl), st(stats::get()), tra(tra)
 {
   // Try to setup the connection.
   if (set_up())
     {
-      // Register the client with the traffic.
-      tra.insert(this);
-      // Holding time.
-      double ht = htg();
-      // Tear down time.
-      tdt = now() + ht;
-      schedule(tdt);
+      // Try to reconfigure the connection.
+      if (reconfigure())
+        {
+          // Register the client with the traffic.
+          tra.insert(this);
+          // Holding time.
+          double ht = htg();
+          // Tear down time.
+          tdt = now() + ht;
+          schedule(tdt);
+        }
+      else
+        // We managed to establish the connection, but failed to
+        // reconfigure it.  That's the end of the game.
+        destroy();
     }
   else
     // We didn't manage to establish the connection, and so the client
@@ -62,6 +71,24 @@ bool client::set_up()
   return status;
 }
 
+bool
+client::reconfigure()
+{
+  assert(conn.is_established());
+
+  // Choose the next vertex.
+  vertex new_dst = get_new_dst();
+
+  // Reconfigure the connection for the new source vertex.
+  auto result = conn.reconfigure(new_dst);
+  st.reconfigured(result != boost::none);
+
+  if (result != boost::none)
+    st.reconfigured_conn(conn, result.get().first, result.get().second);
+
+  return result != boost::none;
+}
+
 const connection &
 client::get_connection() const
 {
@@ -75,4 +102,23 @@ client::destroy()
   conn.tear_down();
   tra.erase(this);
   tra.delete_me_later(this);
+}
+
+vertex
+client::get_new_dst()
+{
+  set<vertex> candidates;
+  
+  do
+    {
+      // The new source should be this number of nodes away.
+      int hops = nohdg() + 1;
+
+      // Find the vertexes which are the given number of hops away.
+      vertex dst = conn.get_demand().first.second;
+      candidates = find_vertexes(m_mdl, dst, hops);
+    }
+  while (candidates.empty());
+
+  return get_random_element(candidates, m_rng);
 }

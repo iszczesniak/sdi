@@ -42,6 +42,20 @@ class stats: public module<sim>
   // The number of slices of the established connection.
   dbl_acc m_nscec;
 
+  // The probability of reconfiguring a connection.
+  dbl_acc m_prc;
+  // The length of the reconfigured connection.
+  dbl_acc m_lenrc;
+  // The number of links of the reconfigured connection.
+  dbl_acc m_nolrc;
+  // The number of slices of the reconfigured connection.
+  dbl_acc m_nscrc;
+  
+  // The number of new links used in reconfiguration.
+  dbl_acc m_newrc;
+  // The number of old links used in reconfiguration.
+  dbl_acc m_oldrc;
+
   // The arguments of the run.
   sdi_args args;
   // The total timer, i.e., keeps track from the beginning of the run.
@@ -68,6 +82,14 @@ public:
   // Report the established connection.
   void
   established_conn(const connection &conn);
+
+  // Report the reconfiguration status.
+  void
+  reconfigured(bool status);
+
+  // Report the reconfigured connection.
+  void
+  reconfigured_conn(const connection &conn, int newrc, int oldrc);
 
 private:
   // Calculate the average number of fragments on a link.

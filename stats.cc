@@ -41,6 +41,19 @@ stats::stats(const sdi_args &args, const traffic &tra):
   // The mean number of slices of an established connection.
   cout << "nscec" << " ";
 
+  // The probability of reconfiguring a connection.
+  cout << "prc" << " ";
+  // The mean length of a reconfigured connection.
+  cout << "lenrc" << " ";
+  // The mean number of links of a reconfigured connection.
+  cout << "nolrc" << " ";
+  // The mean number of slices of a reconfigured connection.
+  cout << "nscrc" << " ";
+  // The mean number of new links used in reconfiguration.
+  cout << "newrc" << " ";
+  // The mean number of old links used in reconfiguration.
+  cout << "oldrc" << " ";
+
   // The number of currently active connections.
   cout << "conns" << " ";
   // The capacity served.
@@ -95,6 +108,19 @@ stats::operator()(double st)
   // The mean number of slices of an established connection.
   cout << ba::mean(m_nscec) << " ";
 
+  // The mean probability of reconfiguring a connection.
+  cout << ba::mean(m_prc) << " ";
+  // The mean length of a reconfigured connection.
+  cout << ba::mean(m_lenrc) << " ";
+  // The mean number of links of a reconfigured connection.
+  cout << ba::mean(m_nolrc) << " ";
+  // The mean number of slices of a reconfigured connection.
+  cout << ba::mean(m_nscrc) << " ";
+  // The mean number of new links used in reconfiguration.
+  cout << ba::mean(m_newrc) << " ";
+  // The mean number of old links used in reconfiguration.
+  cout << ba::mean(m_oldrc) << " ";
+
   // The number of currently active connections.
   cout << tra.nr_clients() << " ";
   // The capacity served.
@@ -111,6 +137,12 @@ stats::operator()(double st)
   m_lenec = dbl_acc();
   m_nolec = dbl_acc();
   m_nscec = dbl_acc();
+  m_prc = dbl_acc();
+  m_lenrc = dbl_acc();
+  m_nolrc = dbl_acc();
+  m_nscrc = dbl_acc();
+  m_newrc = dbl_acc();
+  m_oldrc = dbl_acc();
 
   // Start again to get next delta time.
   dtimer.start();
@@ -142,6 +174,26 @@ stats::established_conn(const connection &conn)
   m_lenec(len);
   m_nolec(nol);
   m_nscec(nsc);
+}
+
+void
+stats::reconfigured(bool status)
+{
+  m_prc(status);
+}
+
+void
+stats::reconfigured_conn(const connection &conn, int newrc, int oldrc)
+{
+  int len = conn.get_len();
+  int nol = conn.get_nol();
+  int nsc = conn.get_nsc();
+
+  m_lenrc(len);
+  m_nolrc(nol);
+  m_nscrc(nsc);
+  m_newrc(newrc);
+  m_oldrc(oldrc);
 }
 
 double

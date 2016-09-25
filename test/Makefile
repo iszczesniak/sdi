@@ -3,8 +3,8 @@ yen_ksp various
 
 OTHER = connected
 
-OBJS = sample_graphs.o ../cdijkstra.o ../edksp.o ../mypoint.o	\
- ../routing.o ../sdi_args.o ../teventqueue.o ../utils.o		\
+OBJS = sample_graphs.o ../cdijkstra.o ../connection.o ../edksp.o	\
+ ../mypoint.o ../routing.o ../sdi_args.o ../teventqueue.o ../utils.o	\
  ../utils_netgen.o ../yenksp.o
 
 CXXFLAGS = -g -Wno-deprecated -std=c++11

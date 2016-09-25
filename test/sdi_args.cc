@@ -26,6 +26,7 @@ BOOST_AUTO_TEST_CASE(sdi_args_test_1)
                         "--mht", "2",
                         "--mnsc", "5",
                         "--st", "first",
+                        "--re", "complete",
                         "--rt", "cdijkstra",
                         "--ml", "100",
                         "--hash", "blablabla"};
@@ -37,6 +38,7 @@ BOOST_AUTO_TEST_CASE(sdi_args_test_1)
   routing::set_rt(args.rt);
   routing::set_ml(args.ml);
   routing::set_st(args.st);
+  connection::set_re(args.re);
 
   BOOST_CHECK(args.hash == "blablabla");
 
@@ -46,6 +48,7 @@ BOOST_AUTO_TEST_CASE(sdi_args_test_1)
   BOOST_CHECK(routing::get_ml() == 100);
   BOOST_CHECK(routing::get_st() == routing::st_t::first);
   BOOST_CHECK(routing::get_rt() == routing::rt_t::cdijkstra);
+  BOOST_CHECK(connection::get_re() == connection::re_t::complete);
   
   BOOST_CHECK_CLOSE(args.ol, 1, 0.0001);
   BOOST_CHECK_CLOSE(args.mht, 2, 0.0001);
@@ -73,6 +76,7 @@ BOOST_AUTO_TEST_CASE(sdi_args_test_2)
                         "--st", "fittest",
                         "--hash", "blablabla",
                         "--ml", "1000",
+                        "--re", "complete",
                         "--rt", "cdijkstra",
                         "--seed", "2"};
 
@@ -81,8 +85,10 @@ BOOST_AUTO_TEST_CASE(sdi_args_test_2)
   sdi_args args = process_sdi_args(argc, argv);
   routing::set_st(args.st);
   routing::set_ml(args.ml);
+  connection::set_re(args.re);
 
   BOOST_CHECK(args.seed == 2);
   BOOST_CHECK(routing::get_st() == routing::st_t::fittest);
   BOOST_CHECK(routing::get_ml() == 1000);
+  BOOST_CHECK(connection::get_re() == connection::re_t::complete);
 }

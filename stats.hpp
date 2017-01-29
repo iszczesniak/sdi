@@ -4,9 +4,7 @@
 #include "event.hpp"
 #include "connection.hpp"
 #include "graph.hpp"
-#include "module.hpp"
 #include "sdi_args.hpp"
-#include "sim.hpp"
 #include "traffic.hpp"
 
 #include <vector>
@@ -21,7 +19,7 @@ using boost::timer::cpu_times;
 
 class client;
 
-class stats: public module<sim>
+class stats
 {
   // The singleton of the class.
   static stats *singleton;
@@ -68,20 +66,6 @@ public:
 
   static stats &
   get();
-
-  void
-  schedule(double t);
-
-  void
-  operator()(double t);
-
-  // Report the establishment status.
-  void
-  established(bool status);
-
-  // Report the established connection.
-  void
-  established_conn(const connection &conn);
 
   // Report the reconfiguration status.
   void

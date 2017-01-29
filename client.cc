@@ -61,13 +61,6 @@ bool client::set_up()
   // Set up the connection.
   bool status = conn.establish(d);
 
-  // Report whether the connection was established or not.
-  st.established(status);
-
-  // If established, report the connection.
-  if (status)
-    st.established_conn(conn);
-
   return status;
 }
 

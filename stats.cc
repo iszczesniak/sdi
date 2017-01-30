@@ -35,18 +35,23 @@ stats::get()
 }
 
 void
-stats::operator()(const connection &conn, int hops, bool status,
-                  int newrc, int oldrc)
+stats::operator()(const connection &conn, int hops,
+                  boost::optional<std::pair<int, int>> result)
 {
-  assert(hops >= 1);
+  assert(hops > 0);
 
   // We care about the stats only for the hops <= 10.
   if (hops <= 10)
     {
+      bool status = (result != boost::none);
+
       m_prc[hops](status);
-  
+
       if (status)
         {
+          int newrc = result.get().first;
+          int oldrc = result.get().second;
+
           int len = conn.get_len();
           int nol = conn.get_nol();
           int nsc = conn.get_nsc();

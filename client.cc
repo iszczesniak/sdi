@@ -76,12 +76,11 @@ client::reconfigure()
 
   // Reconfigure the connection for the new source vertex.
   auto result = conn.reconfigure(new_dst);
-  bool status = (result != boost::none);
 
   // Report the data on the reconfiguration.
-  st(conn, hops, status, result.get().first, result.get().second);
+  st(conn, hops, result);
 
-  return status;
+  return (result != boost::none);
 }
 
 const connection &

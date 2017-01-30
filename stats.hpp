@@ -2,6 +2,7 @@
 #define STATS_HPP
 
 #include <vector>
+#include <boost/optional.hpp>
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
@@ -40,8 +41,8 @@ public:
 
   // Report the reconfigured connection.
   void
-  operator()(const connection &conn, int dist, bool status,
-             int newrc, int oldrc);
+  operator()(const connection &conn, int dist,
+             boost::optional<std::pair<int, int>> result);
 };
 
 #endif

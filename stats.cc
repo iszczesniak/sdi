@@ -9,8 +9,8 @@ using namespace std;
 // The singleton of the class.  The compiler initializes it to null.
 stats *stats::singleton;
 
-stats::stats(const sdi_args &args, const traffic &tra):
-  args(args), tra(tra)
+stats::stats() : m_newrc(10), m_oldrc(10), m_nolrc(10),
+                 m_prc(10), m_lenrc(10), m_nscrc(10)
 {
   assert(!singleton);
   singleton = this;

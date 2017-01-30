@@ -2,6 +2,7 @@
 #include "sdi_args.hpp"
 #include "sim.hpp"
 #include "stats.hpp"
+#include "traffic.hpp"
 #include "utils_netgen.hpp"
 
 #include <boost/random.hpp>
@@ -126,8 +127,8 @@ simulate(const sdi_args &args_para)
   // The traffic module.
   traffic t(args.mcat, args.mht, args.mnsc);
 
-  // The stats module.
-  stats s(args, t);
+  // The stats singleton.
+  stats s;
 
   // Run the simulation.
   sim::run(args.sim_time);

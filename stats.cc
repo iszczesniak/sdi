@@ -35,22 +35,28 @@ stats::get()
 }
 
 void
-stats::operator()(const connection &conn, int d, bool status,
+stats::operator()(const connection &conn, int hops, bool status,
                   int newrc, int oldrc)
 {
-  m_prc(status);
-  
-  if (status)
+  assert(hops >= 1);
+
+  // We care about the stats only for the hops <= 10.
+  if (hops <= 10)
     {
-      int len = conn.get_len();
-      int nol = conn.get_nol();
-      int nsc = conn.get_nsc();
+      m_prc[hops](status);
+  
+      if (status)
+        {
+          int len = conn.get_len();
+          int nol = conn.get_nol();
+          int nsc = conn.get_nsc();
 
-      m_newrc(newrc);
-      m_oldrc(oldrc);
-      m_nolrc(nol);
+          m_newrc[hops](newrc);
+          m_oldrc[hops](oldrc);
+          m_nolrc[hops](nol);
 
-      m_lenrc(len);
-      m_nscrc(nsc);
+          m_lenrc[hops](len);
+          m_nscrc[hops](nsc);
+        }
     }
 }

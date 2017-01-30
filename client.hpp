@@ -81,7 +81,8 @@ private:
   // Finds a new destination vertex based on the current destination
   // vertex.  This new source vertex will be used for connection
   // reconfiguration.
-  vertex get_new_dst();
+  std::pair<vertex, int>
+  get_new_dst();
 };
 
 #endif /* CLIENT_HPP */

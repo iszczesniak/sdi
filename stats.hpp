@@ -67,18 +67,10 @@ public:
   static stats &
   get();
 
-  // Report the reconfiguration status.
-  void
-  reconfigured(bool status);
-
   // Report the reconfigured connection.
   void
-  reconfigured_conn(const connection &conn, int newrc, int oldrc);
-
-private:
-  // Calculate the average number of fragments on a link.
-  double
-  calculate_frags();
+  operator()(const connection &conn, int dist, bool status,
+             int newrc, int oldrc);
 };
 
 #endif

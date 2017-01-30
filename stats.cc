@@ -35,21 +35,22 @@ stats::get()
 }
 
 void
-stats::reconfigured(bool status)
+stats::operator()(const connection &conn, int d, bool status,
+                  int newrc, int oldrc)
 {
   m_prc(status);
-}
+  
+  if (status)
+    {
+      int len = conn.get_len();
+      int nol = conn.get_nol();
+      int nsc = conn.get_nsc();
 
-void
-stats::reconfigured_conn(const connection &conn, int newrc, int oldrc)
-{
-  int len = conn.get_len();
-  int nol = conn.get_nol();
-  int nsc = conn.get_nsc();
+      m_newrc(newrc);
+      m_oldrc(oldrc);
+      m_nolrc(nol);
 
-  m_lenrc(len);
-  m_nolrc(nol);
-  m_nscrc(nsc);
-  m_newrc(newrc);
-  m_oldrc(oldrc);
+      m_lenrc(len);
+      m_nscrc(nsc);
+    }
 }

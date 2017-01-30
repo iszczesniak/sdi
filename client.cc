@@ -70,16 +70,17 @@ client::reconfigure()
   assert(conn.is_established());
 
   // Choose the next vertex.
-  vertex new_dst = get_new_dst();
+  vertex new_dst;
+  int hops;
+  tie(new_dst, hops) = get_new_dst();
 
   // Reconfigure the connection for the new source vertex.
   auto result = conn.reconfigure(new_dst);
-  st.reconfigured(result != boost::none);
+  bool status = (result != boost::none);
 
-  if (result != boost::none)
-    st.reconfigured_conn(conn, result.get().first, result.get().second);
+  st(conn, hops, status, result.get().first, result.get().second);
 
-  return result != boost::none;
+  return status;
 }
 
 const connection &
@@ -97,15 +98,16 @@ client::destroy()
   tra.delete_me_later(this);
 }
 
-vertex
+pair<vertex, int>
 client::get_new_dst()
 {
   set<vertex> candidates;
-  
+  int hops;
+
   do
     {
       // The new source should be this number of nodes away.
-      int hops = nohdg() + 1;
+      hops = nohdg() + 1;
 
       // Find the vertexes which are the given number of hops away.
       vertex dst = conn.get_demand().first.second;
@@ -113,5 +115,7 @@ client::get_new_dst()
     }
   while (candidates.empty());
 
-  return get_random_element(candidates, m_rng);
+  vertex v = get_random_element(candidates, m_rng);
+  
+  return make_pair(v, hops);
 }

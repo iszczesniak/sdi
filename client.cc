@@ -78,6 +78,7 @@ client::reconfigure()
   auto result = conn.reconfigure(new_dst);
   bool status = (result != boost::none);
 
+  // Report the data on the reconfiguration.
   st(conn, hops, status, result.get().first, result.get().second);
 
   return status;

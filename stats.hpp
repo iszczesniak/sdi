@@ -20,19 +20,21 @@ class stats
   typedef ba::accumulator_set<double, ba::features<ba::tag::count,
                                                    ba::tag::mean>> dbl_acc;
 
+  typedef std::vector<dbl_acc> acc_vec;
+
   // The number of new links used in reconfiguration.
-  std::vector<dbl_acc> m_newrc;
+  acc_vec m_newrc;
   // The number of old links used in reconfiguration.
-  std::vector<dbl_acc> m_oldrc;
+  acc_vec m_oldrc;
   // The number of links of the reconfigured connection.
-  std::vector<dbl_acc> m_nolrc;
+  acc_vec m_nolrc;
 
   // The probability of reconfiguring a connection.
-  std::vector<dbl_acc> m_prc;
+  acc_vec m_prc;
   // The length of the reconfigured connection.
-  std::vector<dbl_acc> m_lenrc;
+  acc_vec m_lenrc;
   // The number of slices of the reconfigured connection.
-  std::vector<dbl_acc> m_nscrc;
+  acc_vec m_nscrc;
 
   // The simulation arguments.
   sdi_args args;
@@ -49,6 +51,10 @@ public:
   void
   operator()(const connection &conn, int dist,
              boost::optional<std::pair<int, int>> result);
+
+private:
+  void
+  print(const string &txt, const acc_vec &vec);
 };
 
 #endif

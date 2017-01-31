@@ -1,6 +1,8 @@
 #ifndef STATS_HPP
 #define STATS_HPP
 
+#include "sdi_args.hpp"
+
 #include <vector>
 #include <boost/optional.hpp>
 
@@ -32,8 +34,12 @@ class stats
   // The number of slices of the reconfigured connection.
   std::vector<dbl_acc> m_nscrc;
 
+  // The simulation arguments.
+  sdi_args args;
+  
 public:
-  stats();
+  stats(const sdi_args &args);
+  ~stats();
 
   // Returns the singleton.
   static stats &

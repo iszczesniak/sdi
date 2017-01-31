@@ -128,7 +128,7 @@ simulate(const sdi_args &args_para)
   traffic t(args.mcat, args.mht, args.mnsc);
 
   // The stats singleton.
-  stats s;
+  stats s(args);
 
   // Run the simulation.
   sim::run(args.sim_time);

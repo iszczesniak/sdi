@@ -90,4 +90,8 @@ stats::operator()(const connection &conn, int hops,
 void
 stats::print(const string &txt, const acc_vec &vec)
 {
+  cout << txt;
+
+  for(const auto &e: vec)
+    cout << " " << ba::mean(e);
 }

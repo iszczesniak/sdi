@@ -32,11 +32,6 @@ stats::stats(const sdi_args &args) : args(args),
 
 stats::~stats()
 {
-  // The seed of the simulation.
-  cout << args.seed << " ";
-  // The hash of the simulation.
-  cout << args.hash << " ";
-
   // The measured values.
   print("newrc", m_newrc);
   print("oldrc", m_oldrc);
@@ -44,9 +39,6 @@ stats::~stats()
   print("prc", m_prc);
   print("lenrc", m_lenrc);
   print("nscrc", m_nscrc);
-
-  // That's it.  Thank you.
-  cout << endl;
 }
 
 stats &
@@ -90,8 +82,8 @@ stats::operator()(const connection &conn, int hops,
 void
 stats::print(const string &txt, const acc_vec &vec)
 {
-  cout << txt;
-
+  cout << args.seed << " " << args.hash << " " << txt;
   for(const auto &e: vec)
     cout << " " << ba::mean(e);
+  cout << endl;
 }

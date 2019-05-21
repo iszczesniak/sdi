@@ -11,7 +11,7 @@ CXXFLAGS = -g -Wno-deprecated -std=c++11
 #CXXFLAGS = -O3 -Wno-deprecated -std=c++11
 
 CXXFLAGS := $(CXXFLAGS) -I ../
-CXXFLAGS := $(CXXFLAGS) -I ../include
+CXXFLAGS := $(CXXFLAGS) -I ../des/include
 
 # Boost
 BOOSTPATH = ~/boost

@@ -27,7 +27,7 @@ class traffic: public module<sim>
   // The client arrival time distribution.
   boost::exponential_distribution<> catd;
   // The client arrival time generator.
-  boost::variate_generator<sim::rng_type &,
+  boost::variate_generator<sim::rne_type &,
                            boost::exponential_distribution<> > catg;
 
   // The mean holding time.

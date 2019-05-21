@@ -262,5 +262,5 @@ routing::select_random(const SSC &ssc, int nsc)
   if (sssc.empty())
     return SSC();
   else
-    return get_random_element(sssc, m_rng);
+    return get_random_element(sssc, m_rne);
 }

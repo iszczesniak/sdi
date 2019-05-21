@@ -151,6 +151,7 @@ std::ostream &
 operator << (std::ostream &os, const sscpath &p)
 {
   os << "sscpath(" << p.first << ", " << p.second << ")";
+  return os;
 }
 
 /**
@@ -163,4 +164,5 @@ operator << (std::ostream &os, const CEV &cev)
      << get<0>(cev) << ", "
      << get<1>(cev) << ", "
      << get<2>(cev) << ")";
+  return os;
 }

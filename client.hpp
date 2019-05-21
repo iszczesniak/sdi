@@ -32,7 +32,7 @@ class client: public module<sim>
   // The holding time distribution.
   boost::exponential_distribution<> htd;
   // The holding time generator.
-  boost::variate_generator<sim::rng_type &,
+  boost::variate_generator<sim::rne_type &,
                            boost::exponential_distribution<> > htg;
 
   // The mean number of slices.
@@ -40,7 +40,7 @@ class client: public module<sim>
   // The number of slices distribution.
   boost::poisson_distribution<> nscd;
   // The number of slices generator.
-  boost::variate_generator<sim::rng_type &,
+  boost::variate_generator<sim::rne_type &,
                            boost::poisson_distribution<> > nscdg;
 
   // The distance between the old source and the new source is
@@ -52,7 +52,7 @@ class client: public module<sim>
   // The number of hops distribution.
   boost::poisson_distribution<> nohd;
   // The number of hops generator.
-  boost::variate_generator<sim::rng_type &,
+  boost::variate_generator<sim::rne_type &,
                            boost::poisson_distribution<> > nohdg;
 
   // The connection.

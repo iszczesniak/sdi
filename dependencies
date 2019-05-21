@@ -1,43 +1,42 @@
-cdijkstra.o: cdijkstra.cc cdijkstra.hpp graph.hpp routing.hpp \
- include/module.hpp include/simulation.hpp include/event.hpp \
- include/module.hpp utils.hpp
+cdijkstra.o: cdijkstra.cc cdijkstra.hpp graph.hpp routing.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp utils.hpp
 client.o: client.cc client.hpp connection.hpp graph.hpp \
- include/module.hpp include/simulation.hpp include/event.hpp \
- include/module.hpp stats.hpp include/event.hpp sdi_args.hpp \
- cdijkstra.hpp routing.hpp traffic.hpp utils_netgen.hpp mypoint.hpp \
- utils.hpp teventqueue.hpp
-connection.o: connection.cc connection.hpp graph.hpp routing.hpp \
- include/module.hpp include/simulation.hpp include/event.hpp \
- include/module.hpp utils.hpp
-edksp.o: edksp.cc edksp.hpp graph.hpp routing.hpp include/module.hpp \
- include/simulation.hpp include/event.hpp include/module.hpp \
- edge_disjoint_ksp.hpp custom_dijkstra_call.hpp utils.hpp
-event.o: event.cc include/event.hpp include/module.hpp
-module.o: module.cc include/module.hpp
-routing.o: routing.cc routing.hpp graph.hpp include/module.hpp \
- include/simulation.hpp include/event.hpp include/module.hpp \
- cdijkstra.hpp edksp.hpp utils.hpp yenksp.hpp
-sdi.o: sdi.cc graph.hpp sdi_args.hpp cdijkstra.hpp routing.hpp \
- include/module.hpp include/simulation.hpp include/event.hpp \
- include/module.hpp connection.hpp sim.hpp stats.hpp include/event.hpp \
+ des/include/module.hpp sim.hpp des/include/simulation.hpp \
+ des/include/event.hpp des/include/module.hpp stats.hpp \
+ des/include/event.hpp sdi_args.hpp cdijkstra.hpp routing.hpp traffic.hpp \
+ utils_netgen.hpp mypoint.hpp utils.hpp teventqueue.hpp
+connection.o: connection.cc connection.hpp graph.hpp routing.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp utils.hpp
+edksp.o: edksp.cc edksp.hpp graph.hpp routing.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp edge_disjoint_ksp.hpp custom_dijkstra_call.hpp \
+ utils.hpp
+routing.o: routing.cc routing.hpp graph.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp cdijkstra.hpp edksp.hpp utils.hpp yenksp.hpp
+sdi.o: sdi.cc graph.hpp sdi_args.hpp cdijkstra.hpp routing.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp connection.hpp stats.hpp des/include/event.hpp \
  traffic.hpp client.hpp utils_netgen.hpp mypoint.hpp utils.hpp \
  teventqueue.hpp
 sdi_args.o: sdi_args.cc sdi_args.hpp cdijkstra.hpp graph.hpp routing.hpp \
- include/module.hpp include/simulation.hpp include/event.hpp \
- include/module.hpp connection.hpp utils.hpp
-simulation.o: simulation.cc include/simulation.hpp include/event.hpp \
- include/module.hpp
-stats.o: stats.cc client.hpp connection.hpp graph.hpp include/module.hpp \
- stats.hpp include/event.hpp sdi_args.hpp cdijkstra.hpp routing.hpp \
- include/simulation.hpp include/event.hpp include/module.hpp traffic.hpp \
+ sim.hpp des/include/simulation.hpp des/include/event.hpp \
+ des/include/module.hpp des/include/module.hpp connection.hpp utils.hpp
+stats.o: stats.cc client.hpp connection.hpp graph.hpp \
+ des/include/module.hpp sim.hpp des/include/simulation.hpp \
+ des/include/event.hpp des/include/module.hpp stats.hpp \
+ des/include/event.hpp sdi_args.hpp cdijkstra.hpp routing.hpp traffic.hpp \
  utils_netgen.hpp mypoint.hpp utils.hpp teventqueue.hpp
 traffic.o: traffic.cc traffic.hpp client.hpp connection.hpp graph.hpp \
- include/module.hpp custom_dijkstra_call.hpp
+ des/include/module.hpp sim.hpp des/include/simulation.hpp \
+ des/include/event.hpp des/include/module.hpp custom_dijkstra_call.hpp
 utils.o: utils.cc utils.hpp graph.hpp
 utils_netgen.o: utils_netgen.cc utils_netgen.hpp graph.hpp mypoint.hpp \
- sdi_args.hpp cdijkstra.hpp routing.hpp include/module.hpp \
- include/simulation.hpp include/event.hpp include/module.hpp \
- connection.hpp utils.hpp teventqueue.hpp
-yenksp.o: yenksp.cc yenksp.hpp graph.hpp routing.hpp include/module.hpp \
- include/simulation.hpp include/event.hpp include/module.hpp yen_ksp.hpp \
- custom_dijkstra_call.hpp utils.hpp
+ sdi_args.hpp cdijkstra.hpp routing.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp connection.hpp utils.hpp teventqueue.hpp
+yenksp.o: yenksp.cc yenksp.hpp graph.hpp routing.hpp sim.hpp \
+ des/include/simulation.hpp des/include/event.hpp des/include/module.hpp \
+ des/include/module.hpp yen_ksp.hpp custom_dijkstra_call.hpp utils.hpp

@@ -7,7 +7,7 @@ yenksp.o
 
 CXXFLAGS := $(CXXFLAGS) -g
 CXXFLAGS := $(CXXFLAGS) -std=c++11
-CXXFLAGS := $(CXXFLAGS) -I include
+CXXFLAGS := $(CXXFLAGS) -I des/include
 
 # Use the C++ linker
 LINK.o = $(LINK.cc)

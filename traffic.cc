@@ -7,7 +7,7 @@
 using namespace std;
 
 traffic::traffic(double mcat, double mht, double mnsc):
-  mcat(mcat), catd(1 / mcat), catg(m_rng, catd),
+  mcat(mcat), catd(1 / mcat), catg(m_rne, catd),
   mht(mht), mnsc(mnsc), idc()
 {
   schedule(0);

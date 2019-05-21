@@ -104,10 +104,10 @@ simulate(const sdi_args &args_para)
   connection::set_re(args.re);
 
   // This simulation object.
-  sim::rng().seed(args.seed);
+  sim::rne().seed(args.seed);
 
   // Generate the graph.
-  sim::mdl() = generate_graph(args, sim::rng());
+  sim::mdl() = generate_graph(args, sim::rne());
 
   // Make sure there is only one component.
   assert(is_connected(sim::mdl()));

@@ -14,9 +14,9 @@
 using namespace std;
 
 client::client(double mht, double mnsc, traffic &tra):
-  mht(mht), htd(1 / mht), htg(m_rng, htd),
-  mnsc(mnsc), nscd(mnsc - 1), nscdg(m_rng, nscd),
-  nohd(mnoh - 1), nohdg(m_rng, nohd),
+  mht(mht), htd(1 / mht), htg(m_rne, htd),
+  mnsc(mnsc), nscd(mnsc - 1), nscdg(m_rne, nscd),
+  nohd(mnoh - 1), nohdg(m_rne, nohd),
   conn(m_mdl), st(stats::get()), tra(tra)
 {
   // Try to setup the connection.
@@ -54,7 +54,7 @@ bool client::set_up()
   // The new demand.
   demand d;
   // The demand end nodes.
-  d.first = random_node_pair(m_mdl, m_rng);
+  d.first = random_node_pair(m_mdl, m_rne);
   // The number of slices the signal requires.  It's Poisson + 1.
   d.second = nscdg() + 1;
 
@@ -120,5 +120,5 @@ client::get_new_dst()
     }
   while (candidates.empty());
 
-  return get_random_element(candidates, m_rng);
+  return get_random_element(candidates, m_rne);
 }

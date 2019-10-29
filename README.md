@@ -17,8 +17,8 @@ The first version (available in the repository under the tag "1.0")
 produced the results for this article:
 
 I. Szcześniak, A. Jajszczyk, and A. Pach, "Mobile routing in elastic
-optical networks", IEEE/CIC International Conference on Communications
-in China, pp. 107-111, October 2014.
+optical networks", *IEEE/CIC International Conference on
+Communications in China*, pp. 107-111, October 2014.
 
 <https://doi.org/10.1109/ICCChina.2014.7008252>
 
